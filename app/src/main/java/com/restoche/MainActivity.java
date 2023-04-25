@@ -7,20 +7,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    Button nologinButton;
 
+    private Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nologinButton = findViewById(R.id.noLogin);
-        nologinButton.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RestoActivity.class);
-            startActivity(intent);
-            });
+        // initialise login button
+        loginButton = findViewById(R.id.button);
+        // Set an OnClickListener for the login button
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: handle login functionality
+            }
+        });
+        // Initialize the "Register" TextView
+        LinearLayout registerTextView = findViewById(R.id.s_inscrire);
 
-
+        // Set an OnClickListener for the "Register" TextView
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Open the "Register" activity
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }

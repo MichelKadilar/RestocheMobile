@@ -1,0 +1,5 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:drawable="@drawable/sign_up" /> <!-- Image de fond pour l'état pressé -->
+    <item android:drawable="@drawable/sign_up" /> <!-- Image de fond pour l'état normal -->
+</selector>

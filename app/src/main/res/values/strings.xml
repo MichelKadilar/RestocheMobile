@@ -67,4 +67,12 @@
     <string name="commenter">Commenter</string>
     <string name="image_resto">image_resto</string>
     <string name="note">Note</string>
+    <string name="register_title_text">S\'inscrire sur Rest\'oche</string>
+    <string name="email_hint">Adresse email</string>
+    <string name="password_hint">Mot de passe</string>
+    <string name="password_confirm_hint">Confirmer le mot de passe</string>
+    <string name="register_text">S\'inscrire</string>
+    <string name="already_have_account_text">Vous avez déjà un compte ?</string>
+    <string name="login_text">Se connecter</string>
+    <string name="do_not_have_account_text" >Vous n\'avez pas de compte ?</string>
 </resources>
