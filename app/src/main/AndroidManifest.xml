@@ -57,6 +57,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".RegisterActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.REGISTER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".RestoActivity"
             android:exported="true">
             <intent-filter>
