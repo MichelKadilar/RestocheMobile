@@ -25,6 +25,11 @@
         android:theme="@style/Theme.RestocheMobile"
         tools:targetApi="31">
         <activity
+            android:name=".DetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/Theme.RestocheMobile.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_restaurant_profile"
@@ -49,6 +54,15 @@
                 <action android:name="android.intent.action.MAIN" />
                 <!-- <action android:name="android.intent.action.VIEW" /> -->
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RestoActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.RESTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <service android:name=".FirebaseMessagingService"
