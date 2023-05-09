@@ -27,8 +27,14 @@ public class DetailActivity extends AppCompatActivity {
 
         DetailFragment detailFragment = new DetailFragment();
         fragmentTransaction.replace(R.id.detail_frag,(Fragment) detailFragment);
+        CommentaireFragment commentFragment = new CommentaireFragment();
+        fragmentTransaction.replace(R.id.fragment_comment,(Fragment) commentFragment);
 
         fragmentTransaction.commit();
+
+
+
+
 
     }
 

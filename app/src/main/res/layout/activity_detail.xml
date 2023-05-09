@@ -5,13 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".DetailActivity"
+    android:orientation="vertical">
     <FrameLayout
         android:id="@+id/detail_frag"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fragment_comment"
+        android:name="com.restoche.CommentaireFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_commentaire"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="579dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"/>
 
 
 
