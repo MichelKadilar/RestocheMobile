@@ -45,6 +45,8 @@
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,10 +63,13 @@
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -85,14 +90,17 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/border_radius_without_color"
+        android:backgroundTint="#1C2331"
         android:text="@string/login_text"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:background="@drawable/border_radius_without_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
 
     <LinearLayout
         android:id="@+id/s_inscrire"
