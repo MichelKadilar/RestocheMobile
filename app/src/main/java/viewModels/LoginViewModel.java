@@ -26,11 +26,11 @@ public class LoginViewModel extends ViewModel {
 
     public boolean validateInputs() {
         // Validez les entrées et renvoyez true si elles sont valides, sinon false
-        return false; // Retournez la valeur correcte après avoir implémenté la logique de validation
+        return true; // Retournez la valeur correcte après avoir implémenté la logique de validation
     }
 
     public boolean authenticate() {
         // Authentifiez l'utilisateur et renvoyez true si la connexion est réussie, sinon false
-        return false; // Retournez la valeur correcte après avoir implémenté la logique d'authentification
+        return true; // Retournez la valeur correcte après avoir implémenté la logique d'authentification
     }
 }
