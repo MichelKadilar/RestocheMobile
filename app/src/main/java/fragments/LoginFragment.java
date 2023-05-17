@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.restoche.MainActivity;
 import com.restoche.R;
 import com.restoche.RegisterActivity;
 
@@ -83,24 +85,37 @@ public class LoginFragment extends Fragment {
 
         loginButton.setOnClickListener(view1 -> {
             if (loginViewModel.validateInputs()) {
-                if (loginViewModel.authenticate()) {
-                    // Connexion réussie, passez à l'activité suivante ou au fragment suivant
-                    Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Échec de la connexion, affichez un message d'erreur
-                    Toast.makeText(getContext(), "Échec de la connexion", Toast.LENGTH_SHORT).show();
-                }
+                loginViewModel.authenticate(new LoginViewModel.OnAuthenticationCompleteListener() {
+                    @Override
+                    public void onAuthenticationComplete(boolean success, FirebaseUser user) {
+                        if (success) {
+                            // Connexion réussie, passez à l'activité suivante ou au fragment suivant
+                            Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Échec de la connexion, affichez un message d'erreur
+                            Toast.makeText(getContext(), "Échec de la connexion", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             } else {
                 // Les entrées ne sont pas valides, affichez un message d'erreur
                 Toast.makeText(getContext(), "Les entrées ne sont pas valides", Toast.LENGTH_SHORT).show();
             }
         });
-
         // Set an OnClickListener for the "Register" TextView
         registerTextView.setOnClickListener(view12 -> {
+            // Load the RegisterFragment
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).loadRegisterFragment();
+            }
+        });
+
+
+        // Set an OnClickListener for the "Register" TextView
+        /*registerTextView.setOnClickListener(view12 -> {
             // Open the "Register" activity
             Intent intent = new Intent(getActivity(), RegisterActivity.class);
             startActivity(intent);
-        });
+        });*/
     }
 }

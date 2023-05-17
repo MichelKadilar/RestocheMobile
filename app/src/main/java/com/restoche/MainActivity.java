@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import fragments.LoginFragment;
+import fragments.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +22,15 @@ public class MainActivity extends AppCompatActivity {
     private void loadLoginFragment() {
         LoginFragment loginFragment = new LoginFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, loginFragment);
+        transaction.replace(R.id.fragment_container, loginFragment);
+        transaction.commit();
+    }
+
+    public void loadRegisterFragment() {
+        RegisterFragment registerFragment = new RegisterFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, registerFragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
