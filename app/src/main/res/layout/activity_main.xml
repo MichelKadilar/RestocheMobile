@@ -17,14 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button">
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/noLogin"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/acceder_sans_me_connecter_text"
             android:textSize="20sp"
+            android:backgroundTint="@color/white"
             android:textColor="@color/black" />
 
         <View

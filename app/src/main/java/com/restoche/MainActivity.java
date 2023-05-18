@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
-    Button loginButton;
+    Button nologinButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginButton = findViewById(R.id.button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        nologinButton = findViewById(R.id.noLogin);
+        nologinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RestoActivity.class);
