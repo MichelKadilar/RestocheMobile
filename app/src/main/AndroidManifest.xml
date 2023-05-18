@@ -14,6 +14,8 @@
 
     <uses-feature android:name="android.hardware.location.gps"
         android:required="false"/>
+    xmlns:tools="http://schemas.android.com/tools" >
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"

@@ -1,6 +1,7 @@
 package com.restoche;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
     @NonNull
     @Override
     public RestoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.fragment_detail,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.card,parent,false);
         return new RestoHolder(view);
     }
 
@@ -36,6 +37,14 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
         holder.titre.setText(resto.getTitle());
         holder.localisation.setText(resto.getLocalisation());
        // holder.constraintLayout.setOnClickListener();
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context , DetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 
