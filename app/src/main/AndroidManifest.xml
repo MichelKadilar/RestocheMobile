@@ -60,7 +60,7 @@
         </activity>
         <activity
             android:name=".RestoActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.RESTO" />
 

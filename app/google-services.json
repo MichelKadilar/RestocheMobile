@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "58895938078",
+    "project_id": "restoche-project",
+    "storage_bucket": "restoche-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58895938078:android:4b34627d6ac15e0e57b40f",
+        "android_client_info": {
+          "package_name": "com.restoche"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58895938078-8pcm3aoqlph0i0mhuudqt1dt1jn65i57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw4JVNYTchkMxdwPC2EOC39jXlv4vIqSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58895938078-8pcm3aoqlph0i0mhuudqt1dt1jn65i57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
