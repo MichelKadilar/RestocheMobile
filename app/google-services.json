@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "58895938078",
+    "firebase_url": "https://restoche-project-default-rtdb.firebaseio.com",
     "project_id": "restoche-project",
     "storage_bucket": "restoche-project.appspot.com"
   },

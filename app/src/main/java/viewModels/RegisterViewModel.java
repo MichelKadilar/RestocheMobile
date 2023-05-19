@@ -1,5 +1,7 @@
 package viewModels;
 
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -14,6 +16,7 @@ public class RegisterViewModel extends ViewModel {
 
     public RegisterViewModel() {
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.setLanguageCode("fr"); // Pour le français
     }
 
     public void registerUser(String email, String password, OnRegistrationCompleteListener listener) {
@@ -23,10 +26,14 @@ public class RegisterViewModel extends ViewModel {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         listener.onRegistrationComplete(true, user);
                     } else {
+                        Exception e = task.getException();
+                        // Utilisez Log.e pour afficher l'exception à la console de débogage
+                        Log.e("RegisterUser", "Registration failed: " + e.getMessage());
                         listener.onRegistrationComplete(false, null);
                     }
                 });
     }
+
 
     public interface OnRegistrationCompleteListener {
         void onRegistrationComplete(boolean success, FirebaseUser user);

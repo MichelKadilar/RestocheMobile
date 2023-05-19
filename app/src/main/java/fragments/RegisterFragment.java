@@ -61,8 +61,11 @@ public class RegisterFragment extends Fragment {
                 String passwordConfirm = editTextPasswordConfirm.getText().toString().trim();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(passwordConfirm)) {
                     // Affichez un message indiquant que les champs ne doivent pas être vides
+                    Toast.makeText(getContext(), "les champs ne doivent pas être vides", Toast.LENGTH_SHORT).show();
+
                 } else if (!password.equals(passwordConfirm)) {
                     // Affichez un message indiquant que les mots de passe doivent correspondre
+                    Toast.makeText(getContext(), "les mots de passe doivent correspondre", Toast.LENGTH_SHORT).show();
                 } else {
                     registerViewModel.registerUser(email, password, new RegisterViewModel.OnRegistrationCompleteListener() {
                         @Override

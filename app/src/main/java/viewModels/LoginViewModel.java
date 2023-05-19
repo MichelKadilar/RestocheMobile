@@ -17,6 +17,7 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel() {
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.setLanguageCode("fr"); // Pour le français
     }
 
     public LiveData<String> getEmail() {
