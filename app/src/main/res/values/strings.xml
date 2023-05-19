@@ -6,6 +6,7 @@
   <!--  <string name="acceder_sans_me_connecter_text"><u><![CDATA[Accéder sans me connecter >]]></u></string> -->
     <string name="remember_text">Se souvenir de mes identifiants</string>
     <string name="connect_text">Se connecter</string>
+    <string name="default_notification_channel_id">default_channel</string>
     <string name="restoche_title_text">Rest\'oche !</string>
     <string name="DAY_LABEL_ABBREVIATION">D</string>
     <string name="WEEK_LABEL_ABBREVIATION">W</string>

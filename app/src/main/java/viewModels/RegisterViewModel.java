@@ -1,7 +1,9 @@
 package viewModels;
 
 import androidx.lifecycle.ViewModel;
+import androidx.test.core.app.ApplicationProvider;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
