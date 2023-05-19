@@ -36,9 +36,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RestoActivity extends AppCompatActivity implements ListeRestoFragment.ItemSelected {
-    TextView restODescription;
+
     RecyclerView recyclerView;
-    Resto resto,resto1,resto2,resto3;
     List<Resto> restoList=new ArrayList<>();
     RequestQueue requestQueue;
     private DatabaseReference mDatabase;
@@ -48,25 +47,13 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
         requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("restos");
         mDatabase.addValueEventListener(postListener);
-
         setContentView(R.layout.activity_resto);
-       // fetchResto();
-        resto1=new Resto("Chez adjo","Adidogome","");
-        resto2=new Resto("Chez adjo","Adidogome","");
-        resto3=new Resto("Chez adjo","Adidogome","");
-        restoList= Arrays.asList(resto1,resto2,resto3);
         recyclerView=findViewById(R.id.listResto);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        RestoAdapter adapter=new RestoAdapter(RestoActivity.this,restoList);
-       recyclerView.setAdapter(adapter);
-
-
-
     }
-    public void writeNewResto(String titre, String localisation, String image) {
-        Resto resto = new Resto(titre, localisation,image);
+    public void writeNewResto(String titre, String localisation, String image,float rating) {
+        Resto resto = new Resto(titre, localisation,image,rating);
 
         mDatabase.child(titre+localisation).setValue(resto);
     }
@@ -82,13 +69,13 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
                 for (DataSnapshot restoSnapshot : dataSnapshot.getChildren()) {
                     Resto resto = restoSnapshot.getValue(Resto.class);
                     Toast.makeText(RestoActivity.this, resto.getTitle(), Toast.LENGTH_SHORT).show();
-                  //  restoList.add(resto);
+                   restoList.add(resto);
                 }
-
-                // Faites ce que vous voulez avec l'objet resto récupéré
             } else {
                 Toast.makeText(RestoActivity.this, "Le restaurant n'existe pas", Toast.LENGTH_LONG).show();
             }
+            RestoAdapter adapter=new RestoAdapter(RestoActivity.this,restoList);
+            recyclerView.setAdapter(adapter);
         }
 
         @Override
@@ -132,9 +119,9 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
                                 String title = jsonObject.getString("title");
                                 String overview = jsonObject.getString("overview");
                                 String poster = jsonObject.getString("poster");
-                                Double rating = jsonObject.getDouble("rating");
+                                float rating = (float)jsonObject.getDouble("rating");
 
-                                Resto resto = new Resto(title , poster,overview );
+                                Resto resto = new Resto(title , poster,overview,rating );
                                 restoList.add(resto);
                             } catch (JSONException e) {
                                 e.printStackTrace();

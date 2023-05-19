@@ -4,14 +4,16 @@ public class Resto {
     private String title;
     private String localisation;
     private String image;
+    private float ratings;
 
     public Resto() {
     }
 
-    public Resto(String title, String localisation,String image) {
+    public Resto(String title, String localisation,String image,float ratings) {
         this.title = title;
         this.localisation = localisation;
         this.image=image;
+        this.ratings=ratings;
     }
 
     public String getTitle() {
@@ -24,6 +26,14 @@ public class Resto {
 
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
+    }
+
+    public float getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(float ratings) {
+        this.ratings = ratings;
     }
 
     public String getImage() {

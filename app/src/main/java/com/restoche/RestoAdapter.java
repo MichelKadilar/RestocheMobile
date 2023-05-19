@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,9 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
         Resto resto=restoList.get(position);
         holder.titre.setText(resto.getTitle());
         holder.localisation.setText(resto.getLocalisation());
+        holder.ratingBar.setRating(resto.getRatings());
+
+
        // holder.constraintLayout.setOnClickListener();
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +60,13 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
     public class RestoHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView titre,localisation;
+        RatingBar ratingBar;
         ConstraintLayout constraintLayout;
 
         public RestoHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.image_carte);
+            ratingBar=itemView.findViewById(R.id.ratingBar);
             titre=itemView.findViewById(R.id.titre);
             localisation=itemView.findViewById(R.id.localisation);
             constraintLayout=itemView.findViewById(R.id.detail_constraint);
