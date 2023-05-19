@@ -19,21 +19,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/exampleFragment"
                 android:name="com.restoche.FragmentRestaurantProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/exampleFragment2"
                 android:name="com.restoche.FragmentRestaurantProfileRatingsAndComments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <fragment
-                android:id="@+id/exampleFragment3"
-                android:name="com.restoche.FragmentOpenStreetMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
