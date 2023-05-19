@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder> {
@@ -39,8 +41,9 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
         holder.localisation.setText(resto.getLocalisation());
         holder.ratingBar.setRating(resto.getRatings());
 
+        String imageUrl = resto.getImage();
+        Picasso.get().load(imageUrl).into(holder.imageView);
 
-       // holder.constraintLayout.setOnClickListener();
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
