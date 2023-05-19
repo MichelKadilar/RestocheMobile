@@ -16,24 +16,32 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RestoActivity extends AppCompatActivity implements ListeRestoFragment.ItemSelected {
 
@@ -47,6 +55,7 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
         requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("restos");
         mDatabase.addValueEventListener(postListener);
+        fetchResto();
         setContentView(R.layout.activity_resto);
         recyclerView=findViewById(R.id.listResto);
         recyclerView.setHasFixedSize(true);
@@ -74,7 +83,7 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
             } else {
                 Toast.makeText(RestoActivity.this, "Le restaurant n'existe pas", Toast.LENGTH_LONG).show();
             }
-            RestoAdapter adapter=new RestoAdapter(RestoActivity.this,restoList);
+           RestoAdapter adapter=new RestoAdapter(RestoActivity.this,restoList);
             recyclerView.setAdapter(adapter);
         }
 
@@ -100,45 +109,51 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
         startActivity(intent);
 
     }
-
     private void fetchResto() {
+        String url = "https://the-fork-the-spoon.p.rapidapi.com/restaurants/v2/list?queryPlaceValueCityId=381418&pageSize=1&pageNumber=1";
+        String apiKey = "d40e116fb1mshb9509405b320cadp1815f4jsn794214bdf4fa";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    List<Resto> restoList = new ArrayList<>();
 
+                    try {
+                         JSONArray dataArray = response.getJSONArray("data");
+                        for (int i = 0; i < dataArray.length(); i++) {
+                            JSONObject jsonObject = dataArray.getJSONObject(i);
+                            String title = jsonObject.getString("name");
+                            String localisation = jsonObject.getString("slug");
+                            String image = jsonObject.getString("mainPhotoSrc");
+                            float rating = (float) jsonObject.getInt("priceRange");
 
-        String url = "https://www.json-generator.com/api/json/get/cfsXpFGwwO?indent=2";
-      //  url= "https://api.content.tripadvisor.com/api/v1/location/locationId/details?language=en&currency=USD";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        for (int i = 0 ; i < response.length() ; i ++){
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                String title = jsonObject.getString("title");
-                                String overview = jsonObject.getString("overview");
-                                String poster = jsonObject.getString("poster");
-                                float rating = (float)jsonObject.getDouble("rating");
-
-                                Resto resto = new Resto(title , poster,overview,rating );
-                                restoList.add(resto);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                            RestoAdapter adapter = new RestoAdapter(RestoActivity.this , restoList);
-
-                            recyclerView.setAdapter(adapter);
+                            Resto resto = new Resto(title,  localisation, image,rating);
+                            restoList.add(resto);
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RestoActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
 
-        requestQueue.add(jsonArrayRequest);
+                        // Mettre à jour l'interface utilisateur avec la liste des restos
+                        RestoAdapter adapter = new RestoAdapter(RestoActivity.this, restoList);
+                        recyclerView.setAdapter(adapter);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+
+                error -> {
+                    Toast.makeText(RestoActivity.this, "Erreur lors de la récupération des données.", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                })
+                {
+                @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            Map<String, String> headers = new HashMap<>();
+            headers.put("X-RapidAPI-Key", apiKey);
+            headers.put("X-RapidAPI-Host", "the-fork-the-spoon.p.rapidapi.com");
+            return headers;
+        }};
+
+        requestQueue.add(jsonObjectRequest);
     }
+
 }
