@@ -1,64 +1,129 @@
 package com.restoche;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentOpenStreetMap#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentOpenStreetMap extends Fragment {
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.OverlayItem;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public FragmentOpenStreetMap() {
-        // Required empty public constructor
-    }
+public class FragmentOpenStreetMap extends AppCompatActivity {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentOpenStreetMap.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentOpenStreetMap newInstance(String param1, String param2) {
-        FragmentOpenStreetMap fragment = new FragmentOpenStreetMap();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private MapView mapView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        setContentView(R.layout.fragment_open_street_map);
+        mapView = findViewById(R.id.MAP_OSM);
+        Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+        GeoPoint startPoint = new GeoPoint(43.65020, 7.00517);
+        IMapController mapController = mapView.getController();
+        mapController.setZoom(10.0);
+        mapController.setCenter(startPoint);
+
+        List<OverlayItem> l = new ArrayList<>();
+        OverlayItem overlayItem = new OverlayItem("Michel's office", "my office", new GeoPoint(5.0, 5.00));
+        Drawable m = overlayItem.getMarker(0);
+        l.add(overlayItem);
+
+        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), l,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+
+                    @Override
+                    public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onItemLongPress(int index, OverlayItem item) {
+                        return false;
+                    }
+                });
+        mOverlay.setFocusItemsOnTap(true);
+        mapView.getOverlays().add(mOverlay);
+    }
+
+    /*@Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        View v = inflater.inflate(R.layout.fragment_open_street_map, container, false);
+        mapView = v.findViewById(R.id.MAP_OSM);
+        Configuration.getInstance().load(requireActivity().getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext()));
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.ALWAYS);
+        GeoPoint startPoint = new GeoPoint(43.65020, 7.00517);
+        IMapController mapController = mapView.getController();
+        mapController.setZoom(10.0);
+        mapController.setCenter(startPoint);
+
+        List<OverlayItem> l = new ArrayList<>();
+        OverlayItem overlayItem = new OverlayItem("Michel's office", "my office", new GeoPoint(5.0, 5.00));
+        Drawable m = overlayItem.getMarker(0);
+        l.add(overlayItem);
+
+        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getContext(), l,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+
+                    @Override
+                    public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onItemLongPress(int index, OverlayItem item) {
+                        return false;
+                    }
+                });
+        mOverlay.setFocusItemsOnTap(true);
+        mapView.getOverlays().add(mOverlay);
+
+        // Inflate the layout for this fragment
+        return v;
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_open_street_map, container, false);
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
     }
 }

@@ -31,6 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <fragment
+                android:id="@+id/exampleFragment3"
+                android:name="com.restoche.FragmentOpenStreetMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
