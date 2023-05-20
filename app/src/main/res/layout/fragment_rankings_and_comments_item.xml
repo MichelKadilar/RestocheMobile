@@ -37,6 +37,7 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="3dp"
             android:max="5"
+            android:isIndicator="true"
             android:progressBackgroundTint="@color/light_gray3"
             android:progressTint="@color/light_gray"
             android:rating="4"
