@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:max="5"
-            android:progressBackgroundTint="@color/light_gray3"
+            android:progressBackgroundTint="@color/light_gray4"
             android:progressTint="@color/light_gray"
             android:rating="4"
             android:scaleX="0.8"

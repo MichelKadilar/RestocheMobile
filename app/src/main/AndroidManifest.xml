@@ -30,7 +30,7 @@
             android:theme="@style/Theme.RestocheMobile" />
 
         <activity
-            android:name=".ActivityFragmentSwitcher"
+            android:name=".ActivityRestaurantProfile"
             android:exported="false"
             android:label="@string/title_activity_restaurant_profile"
             android:theme="@style/Theme.RestocheMobile" />
@@ -42,7 +42,7 @@
             android:theme="@style/Theme.RestocheMobile" />
 
         <activity
-            android:name=".ActivityRestaurantProfile"
+            android:name=".ActivityFragmentSwitcher"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
