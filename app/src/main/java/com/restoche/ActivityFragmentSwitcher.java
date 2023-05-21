@@ -44,8 +44,12 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
                 fm.beginTransaction().replace(R.id.frame_fragment_container, new FragmentParameters()).commit();
                 return true;
             }
+            case R.id.access_profile -> {
+                fm.beginTransaction().replace(R.id.frame_fragment_container, new FragmentUserProfile()).commit();
+                return true;
+            }
             default -> {
-                return false;
+                return true;
             }
         }
     }
