@@ -18,7 +18,7 @@ import model.NotificationComparable;
 
 public class ListAdaptaterNotification extends ArrayAdapter<NotificationComparable> {
     public ListAdaptaterNotification(Context context, ArrayList<NotificationComparable> notifArrayList) {
-        super(context, R.layout.conso_layout, notifArrayList);
+        super(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, notifArrayList);
     }
 
     @NonNull
@@ -26,7 +26,7 @@ public class ListAdaptaterNotification extends ArrayAdapter<NotificationComparab
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         NotificationComparable notificationComp = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.notification_layout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(com.google.android.material.R.layout.support_simple_spinner_dropdown_item, parent, false);
         }
 
         TextView notifName = convertView.findViewById(R.id.notificationNameTextView);

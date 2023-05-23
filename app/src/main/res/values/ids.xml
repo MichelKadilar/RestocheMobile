@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="notificationNameTextView" type="id">6</item>
+    <item name="notificationDateTextView" type="id" />
+    <item name="dateTextView" type="id" />
+    <item name="deleteImageView" type="id" />
+    <item name="noNotiftextView" type="id" />
+    <item name="filterView" type="id" />
+    <item name="setDateButton" type="id" />
+    <item name="titleEditText" type="id" />
+    <item name="descriptionEditText" type="id" />
+    <item name="FilterContainer" type="id" />
+    <item name="addNotifButton" type="id" />
+    <item name="filterValidationButton" type="id" />
+    <item name="deleteFilterImageView" type="id" />
+    <item name="notifListView" type="id" />
+    <item name="beforeRadioButton" type="id" />
+    <item name="afterRadioButton" type="id" />
+</resources>

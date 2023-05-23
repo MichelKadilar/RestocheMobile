@@ -22,6 +22,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.restoche.R;
 
 import java.text.DateFormat;
@@ -62,7 +63,7 @@ public class ManageNotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ManageNotificationActivity);
+        setContentView(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
         Intent intent = getIntent();
         /*if (intent != null){
             this.listNotificationOriginal = intent.getParcelableExtra("listNotif");
@@ -191,8 +192,8 @@ public class ManageNotificationActivity extends AppCompatActivity {
     }
 
     NotificationComparable createNotification(String titre, String text){
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, channel_ID)
-                .setSmallIcon(com.google.firebase.database.ktx.R.drawable.common_full_open_on_phone)
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NotificationActivity.channel_ID)
+                .setSmallIcon(MaterialTextView.VISIBLE)
                 .setContentTitle(titre+indice)
                 .setContentText(text);
 
