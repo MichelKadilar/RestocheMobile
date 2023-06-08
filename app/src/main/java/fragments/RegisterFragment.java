@@ -88,10 +88,11 @@ public class RegisterFragment extends Fragment {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Open the "Login" activity
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).loadLoginFragment();
+                }
             }
         });
+
     }
 }
