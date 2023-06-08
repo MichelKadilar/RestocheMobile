@@ -116,7 +116,7 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
-                    List<Resto> restoList = new ArrayList<>();
+                //    List<Resto> restoList = new ArrayList<>();
 
                     try {
                          JSONArray dataArray = response.getJSONArray("data");
