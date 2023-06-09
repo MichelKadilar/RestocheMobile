@@ -12,11 +12,6 @@
     <string name="MONTH_LABEL_ABBREVIATION">M</string>
     <string name="YEAR_LABEL_ABBREVIATION">Y</string>
     <string name="title_activity_restaurant_profile">ActivityRestaurantProfile</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

@@ -16,14 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nologinButton = findViewById(R.id.noLogin);
-        nologinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RestoActivity.class);
-                startActivity(intent);
-                }
-
-        });
+        nologinButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, RestoActivity.class);
+            startActivity(intent);
+            });
 
 
     }

@@ -14,10 +14,10 @@
     android:title="Favorites"
     app:showAsAction="ifRoom" />
     <item
-    android:id="@+id/action_nearby"
+    android:id="@+id/liste_resto"
     android:enabled="true"
     android:icon="@drawable/localisation_icon"
-    android:title="Nearby"
+    android:title="Liste Resto"
     app:showAsAction="ifRoom" />
     <item
         android:id="@+id/access_parameters"

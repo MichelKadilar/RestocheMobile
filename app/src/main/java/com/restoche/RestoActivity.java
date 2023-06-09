@@ -3,6 +3,7 @@ package com.restoche;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,28 +47,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RestoActivity extends AppCompatActivity implements ListeRestoFragment.ItemSelected {
+public class RestoActivity extends Fragment implements ListeRestoFragment.ItemSelected {
 
     RecyclerView recyclerView;
-    List<Resto> restoList=new ArrayList<>();
+    List<Resto> restoList = new ArrayList<>();
     RequestQueue requestQueue;
     private DatabaseReference mDatabase;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
+        requestQueue = VolleySingleton.getmInstance(getActivity()).getRequestQueue();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("restos");
         mDatabase.addValueEventListener(postListener);
         fetchResto();
-        setContentView(R.layout.activity_resto);
-        recyclerView=findViewById(R.id.listResto);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    public void writeNewResto(String titre, String localisation, String image,float rating) {
-        Resto resto = new Resto(titre, localisation,image,rating);
 
-        mDatabase.child(titre+localisation).setValue(resto);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_liste_resto, container, false);
+        recyclerView = view.findViewById(R.id.list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return view;
+    }
+
+    public void writeNewResto(String titre, String localisation, String image, float rating) {
+        Resto resto = new Resto(titre, localisation, image, rating);
+
+        mDatabase.child(titre + localisation).setValue(resto);
     }
 
 
@@ -77,13 +90,13 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
             if (dataSnapshot.exists()) {
                 for (DataSnapshot restoSnapshot : dataSnapshot.getChildren()) {
                     Resto resto = restoSnapshot.getValue(Resto.class);
-                    Toast.makeText(RestoActivity.this, resto.getTitle(), Toast.LENGTH_SHORT).show();
-                   restoList.add(resto);
+                    Toast.makeText(getActivity(), resto.getTitle(), Toast.LENGTH_SHORT).show();
+                    restoList.add(resto);
                 }
             } else {
-                Toast.makeText(RestoActivity.this, "Le restaurant n'existe pas", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Le restaurant n'existe pas", Toast.LENGTH_LONG).show();
             }
-           RestoAdapter adapter=new RestoAdapter(RestoActivity.this,restoList);
+            RestoAdapter adapter = new RestoAdapter(getActivity(), restoList);
             recyclerView.setAdapter(adapter);
         }
 
@@ -92,8 +105,6 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
             Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
         }
     };
-
-
 
 
     @Override
@@ -105,21 +116,22 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
         fragmentTransaction.replace(R.id.list_rest_frag,(Fragment) detailFragment);
 
         fragmentTransaction.commit();*/
-        Intent intent = new Intent(RestoActivity.this, DetailActivity.class);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
         startActivity(intent);
 
     }
+
     private void fetchResto() {
         String url = "https://the-fork-the-spoon.p.rapidapi.com/restaurants/v2/list?queryPlaceValueCityId=381418&pageSize=1&pageNumber=1";
         String apiKey = "d40e116fb1mshb9509405b320cadp1815f4jsn794214bdf4fa";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
-                //    List<Resto> restoList = new ArrayList<>();
+                    //    List<Resto> restoList = new ArrayList<>();
 
                     try {
-                         JSONArray dataArray = response.getJSONArray("data");
+                        JSONArray dataArray = response.getJSONArray("data");
                         for (int i = 0; i < dataArray.length(); i++) {
                             JSONObject jsonObject = dataArray.getJSONObject(i);
                             String title = jsonObject.getString("name");
@@ -127,12 +139,12 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
                             String image = jsonObject.getString("mainPhotoSrc");
                             float rating = (float) jsonObject.getInt("priceRange");
 
-                            Resto resto = new Resto(title,  localisation, image,rating);
+                            Resto resto = new Resto(title, localisation, image, rating);
                             restoList.add(resto);
                         }
 
                         // Mettre à jour l'interface utilisateur avec la liste des restos
-                        RestoAdapter adapter = new RestoAdapter(RestoActivity.this, restoList);
+                        RestoAdapter adapter = new RestoAdapter(getActivity(), restoList);
                         recyclerView.setAdapter(adapter);
 
                     } catch (JSONException e) {
@@ -141,17 +153,17 @@ public class RestoActivity extends AppCompatActivity implements ListeRestoFragme
                 },
 
                 error -> {
-                    Toast.makeText(RestoActivity.this, "Erreur lors de la récupération des données.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Erreur lors de la récupération des données.", Toast.LENGTH_SHORT).show();
                     error.printStackTrace();
-                })
-                {
-                @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> headers = new HashMap<>();
-            headers.put("X-RapidAPI-Key", apiKey);
-            headers.put("X-RapidAPI-Host", "the-fork-the-spoon.p.rapidapi.com");
-            return headers;
-        }};
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("X-RapidAPI-Key", apiKey);
+                headers.put("X-RapidAPI-Host", "the-fork-the-spoon.p.rapidapi.com");
+                return headers;
+            }
+        };
 
         requestQueue.add(jsonObjectRequest);
     }
