@@ -11,7 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -47,7 +49,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context , DetailActivity.class);
+                Intent intent = new Intent(context , ActivityRestaurantProfile.class);
                 context.startActivity(intent);
             }
         });
