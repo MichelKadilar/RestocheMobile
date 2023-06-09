@@ -1,18 +1,13 @@
 package com.restoche;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 
 public class ActivityFragmentSwitcher extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
 
@@ -49,7 +44,7 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
                 return true;
             }
             case R.id.liste_resto -> {
-                fm.beginTransaction().replace(R.id.frame_fragment_container, new RestoActivity()).commit();
+                fm.beginTransaction().replace(R.id.frame_fragment_container, new RestoFragment()).commit();
                 return true;
             }
             default -> {

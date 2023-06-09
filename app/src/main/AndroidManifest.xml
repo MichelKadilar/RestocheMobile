@@ -27,9 +27,9 @@
         tools:targetApi="31">
 
         <!-- These lines should be added -->
-        <meta-data
+        <!-- <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id"/>
+            android:value="@string/default_notification_channel_id"/>-->
 
         <meta-data
             android:name="firebase_analytics_collection_enabled"
@@ -38,6 +38,16 @@
             android:name="google_analytics_automatic_screen_reporting_enabled"
             android:value="true" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_background" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/purple_200" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="channel123" />
+
         <activity
             android:name=".DetailActivity"
             android:exported="false"
@@ -45,9 +55,17 @@
             android:theme="@style/Theme.RestocheMobile.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_restaurant_profile"
-            android:theme="@style/Theme.RestocheMobile" />
+            android:theme="@style/Theme.RestocheMobile">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- <action android:name="android.intent.action.VIEW" /> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".ActivityRestaurantProfile"
@@ -64,11 +82,6 @@
         <activity
             android:name=".ActivityFragmentSwitcher"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!-- <action android:name="android.intent.action.VIEW" /> -->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -79,21 +92,31 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RestoActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.RESTO" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <service android:name=".FirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".AfterLogin"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="true">
+        </activity>
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     <string name="password_example">*********************</string>
     <string name="email_example">Email (ex. john.doe@gmail.com)</string>
     <string name="m_inscrire_text"><u>M\'inscrire ! :-)</u></string>
-  <!--  <string name="acceder_sans_me_connecter_text"><u><![CDATA[Accéder sans me connecter >]]></u></string> -->
+  <string name="acceder_sans_me_connecter_text"><u><![CDATA[Accéder sans me connecter >]]></u></string>
     <string name="remember_text">Se souvenir de mes identifiants</string>
     <string name="connect_text">Se connecter</string>
     <string name="default_notification_channel_id">default_channel</string>

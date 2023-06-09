@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.restoche.ActivityFragmentSwitcher;
 import com.restoche.MainActivity;
 import com.restoche.R;
 import com.restoche.RegisterActivity;
@@ -74,6 +75,8 @@ public class RegisterFragment extends Fragment {
                                 // L'utilisateur a été enregistré avec succès
                                 Toast.makeText(getContext(), "Inscription réussie", Toast.LENGTH_SHORT).show();
                                 // Redirigez vers une autre activité ou un autre fragment
+                                Intent intent = new Intent(getContext(),ActivityFragmentSwitcher.class);
+                                getContext().startActivity(intent);
                             } else {
                                 Toast.makeText(getContext(), "Les entrées ne sont pas valides", Toast.LENGTH_SHORT).show();
                                 // L'inscription a échoué, affichez un message d'erreur
