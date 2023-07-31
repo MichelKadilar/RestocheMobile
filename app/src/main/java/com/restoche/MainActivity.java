@@ -3,6 +3,7 @@ package com.restoche;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.FirebaseApp;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, loginFragment);
         transaction.commit();
     }
+
 
     public void loadRegisterFragment() {
         RegisterFragment registerFragment = new RegisterFragment();

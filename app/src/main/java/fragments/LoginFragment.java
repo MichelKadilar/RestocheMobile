@@ -16,12 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.restoche.MainActivity;
 import com.restoche.R;
 import com.restoche.RegisterActivity;
+import com.restoche.RestoFragment;
 
 import viewModels.LoginViewModel;
 
@@ -91,6 +93,13 @@ public class LoginFragment extends Fragment {
                         if (success) {
                             // Connexion réussie, passez à l'activité suivante ou au fragment suivant
                             Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
+
+                            // Charger le RestoFragment
+                            RestoFragment restoFragment = new RestoFragment();
+                            FragmentTransaction restoTransaction = getFragmentManager().beginTransaction();
+                            restoTransaction.replace(R.id.fragment_container, restoFragment);
+                            restoTransaction.commit();
+
                         } else {
                             // Échec de la connexion, affichez un message d'erreur
                             Toast.makeText(getContext(), "Échec de la connexion", Toast.LENGTH_SHORT).show();
@@ -102,6 +111,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getContext(), "Les entrées ne sont pas valides", Toast.LENGTH_SHORT).show();
             }
         });
+
         // Set an OnClickListener for the "Register" TextView
         registerTextView.setOnClickListener(view12 -> {
             // Load the RegisterFragment
