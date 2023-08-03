@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -49,6 +51,25 @@ public class RegisterFragment extends Fragment {
         editTextPasswordConfirm = view.findViewById(R.id.editTextTextPasswordConfirm);
         registerButton = view.findViewById(R.id.button);
         loginTextView = view.findViewById(R.id.textView3);
+
+        int nightModeFlags = getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Dark mode is active
+                editTextEmail.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_dark));
+                editTextPassword.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_dark));
+                editTextPasswordConfirm.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_dark));
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Light mode is active
+                editTextEmail.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_light));
+                editTextPassword.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_light));
+                editTextPasswordConfirm.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_light));
+                break;
+        }
 
         // Set an OnClickListener for the register button
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
