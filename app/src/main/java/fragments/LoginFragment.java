@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,6 +56,23 @@ public class LoginFragment extends Fragment {
         loginButton = view.findViewById(R.id.button);
         rememberMeCheckBox = view.findViewById(R.id.checkBox);
         registerTextView = view.findViewById(R.id.s_inscrire);
+
+        int nightModeFlags = getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Dark mode is active
+                emailEditText.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_dark));
+                passwordEditText.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_dark));
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Light mode is active
+                emailEditText.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_light));
+                passwordEditText.setHintTextColor(ContextCompat.getColor(getActivity(), R.color.hint_light));
+                break;
+        }
 
         emailEditText.addTextChangedListener(new TextWatcher() {
             @Override
