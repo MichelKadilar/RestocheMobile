@@ -1,5 +1,6 @@
-package com.restoche;
+package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragmentUserInfo extends Fragment {
+import com.restoche.R;
+
+public class FragmentParameters extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_user_info, container, false);
+        View v = inflater.inflate(R.layout.fragment_parameters, container, false);
+
+        return v;
     }
 }

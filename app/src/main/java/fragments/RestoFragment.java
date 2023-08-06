@@ -1,4 +1,4 @@
-package com.restoche;
+package fragments;
 
 import static android.content.ContentValues.TAG;
 
@@ -26,6 +26,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.restoche.DetailActivity;
+import com.restoche.R;
+import com.restoche.Resto;
+import com.restoche.RestoAdapter;
+import com.restoche.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

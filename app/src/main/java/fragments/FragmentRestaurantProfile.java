@@ -1,4 +1,4 @@
-package com.restoche;
+package fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.restoche.ActivityMap;
+import com.restoche.R;
 
 
 public class FragmentRestaurantProfile extends Fragment {

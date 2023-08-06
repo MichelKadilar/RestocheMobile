@@ -1,6 +1,5 @@
 package fragments;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,8 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.firebase.auth.FirebaseUser;
 import com.restoche.MainActivity;
 import com.restoche.R;
-import com.restoche.RegisterActivity;
-import com.restoche.RestoFragment;
 
 import viewModels.LoginViewModel;
 

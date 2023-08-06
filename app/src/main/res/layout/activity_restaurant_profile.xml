@@ -21,13 +21,13 @@
 
             <fragment
                 android:id="@+id/exampleFragment"
-                android:name="com.restoche.FragmentRestaurantProfile"
+                android:name="fragments.FragmentRestaurantProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <fragment
                 android:id="@+id/exampleFragment2"
-                android:name="com.restoche.FragmentRestaurantProfileRatingsAndComments"
+                android:name="fragments.FragmentRestaurantProfileRatingsAndComments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

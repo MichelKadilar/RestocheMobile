@@ -1,4 +1,4 @@
-package com.restoche;
+package fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.restoche.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentUserActivity extends Fragment {
+public class FragmentRestaurantProfileRatingsAndComments extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -24,9 +26,9 @@ public class FragmentUserActivity extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_activity, container, false);
+        View view = inflater.inflate(R.layout.fragment_restaurant_profile_ratings_and_comments, container, false);
 
-        recyclerView = view.findViewById(R.id.RV_user_activity_list);
+        recyclerView = view.findViewById(R.id.recyclerview);
 
         // Initialiser votre adapter et layoutManager
         List<String> l = new ArrayList<>();
@@ -57,12 +59,12 @@ public class FragmentUserActivity extends Fragment {
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_user_activity_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_rankings_and_comments_item, parent, false);
             return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             String data = dataList.get(position);
             //holder.textView.setText(data);
         }

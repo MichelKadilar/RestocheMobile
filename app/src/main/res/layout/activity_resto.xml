@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/resto_layout"
-    tools:context=".RestoFragment"
+    tools:context="fragments.RestoFragment"
     android:orientation="vertical">
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/listResto"
-      tools:context=".RestoFragment"
+      tools:context="fragments.RestoFragment"
       android:layout_width="0dp"
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"

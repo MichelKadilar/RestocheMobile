@@ -9,6 +9,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import fragments.FragmentParameters;
+import fragments.FragmentUserProfile;
+import fragments.RestoFragment;
+
 public class ActivityFragmentSwitcher extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
 
     private int currentSelectedItemId;

@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/exampleFragment4"
-        android:name="com.restoche.FragmentOpenStreetMap"
+        android:name="fragments.FragmentOpenStreetMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

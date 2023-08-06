@@ -1,4 +1,4 @@
-package com.restoche;
+package fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.restoche.R;
 
 import java.util.Arrays;
 import java.util.List;

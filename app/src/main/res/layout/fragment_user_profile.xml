@@ -22,7 +22,7 @@
 
             <fragment
                 android:id="@+id/fragment_user_info"
-                android:name="com.restoche.FragmentUserInfo"
+                android:name="fragments.FragmentUserInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="0dp"
@@ -30,7 +30,7 @@
 
             <fragment
                 android:id="@+id/fragment_user_activity"
-                android:name="com.restoche.FragmentUserActivity"
+                android:name="fragments.FragmentUserActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="0dp"
