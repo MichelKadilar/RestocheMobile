@@ -58,6 +58,10 @@ public class FragmentRestaurantProfile extends Fragment {
                 TextView restaurantaddress = v.findViewById(R.id.TV_restaurant_profile_address);
                 System.out.println("Resto." + resto.getLocalisation());
                 restaurantaddress.setText(resto.getLocalisation());
+
+                TextView restaurantSpec = v.findViewById(R.id.TV_restaurant_specialities_profile_list);
+                System.out.println("Resto." + resto.getSpec());
+                restaurantSpec.setText(resto.getSpec());
             }
         }
 

@@ -7,6 +7,8 @@ public class Resto implements Parcelable {
     private String title;
     private String localisation;
     private String image;
+
+    private String spec;
     private float ratings;
 
     public Resto() {
@@ -70,6 +72,14 @@ public class Resto implements Parcelable {
         return localisation;
     }
 
+    public String getSpec() {
+        return "Italien, Francais";
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -81,5 +91,6 @@ public class Resto implements Parcelable {
         dest.writeString(localisation);
         dest.writeString(image);
         dest.writeFloat(ratings);
+        dest.writeString(spec);
     }
 }
