@@ -1,4 +1,4 @@
-package com.restoche;
+package models;
 
 public class NotificationModel {
     String id,title,dateTime,message;

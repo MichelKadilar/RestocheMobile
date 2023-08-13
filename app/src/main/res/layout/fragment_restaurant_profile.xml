@@ -17,13 +17,13 @@
 
     <TextView
         android:id="@+id/TV_restaurant_name_profile"
-        android:layout_width="255dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="62dp"
+        android:layout_width="187dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="4dp"
         android:ellipsize="end"
         android:maxLines="4"
-        android:text="Les délices de Maman Tatikoutoumbi du 91"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -44,32 +44,13 @@
         <TextView
             android:id="@+id/TV_restaurant_profile_address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="78dp"
             android:gravity="center"
-            android:text="2 Route des Colles"
+            android:singleLine="false"
+            android:text=""
             android:textColor="@color/gray"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/TV_restaurant_profile_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="06560 Valbonne"
-            android:textColor="@color/gray"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/TV_restaurant_profile_country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="France"
-            android:textColor="@color/gray"
-            android:textSize="18sp" />
 
         <Button
             android:id="@+id/BT_access_map"
@@ -81,7 +62,7 @@
             android:layout_weight="1"
             android:foreground="@drawable/my_border_button"
             android:foregroundTint="@color/gray"
-            android:text="Voir sur la carte ➔"
+            android:text="Voir sur la carte➔"
             android:textColor="@color/gray" />
     </LinearLayout>
 
@@ -122,7 +103,7 @@
         android:layout_marginEnd="12dp"
         android:background="@drawable/my_border"
         android:gravity="center"
-        android:text="13289.4 KM"
+        android:text=""
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

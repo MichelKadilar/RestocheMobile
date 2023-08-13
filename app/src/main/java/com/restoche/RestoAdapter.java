@@ -2,7 +2,6 @@ package com.restoche;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import models.Resto;
 
 public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder> {
     private Context context;
@@ -50,6 +49,7 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.RestoHolder>
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , ActivityRestaurantProfile.class);
+                intent.putExtra("resto", resto);
                 context.startActivity(intent);
             }
         });

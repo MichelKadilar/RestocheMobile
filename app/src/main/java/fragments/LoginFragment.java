@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.restoche.ActivityFragmentSwitcher;
 import com.restoche.MainActivity;
 import com.restoche.R;
 
@@ -111,10 +113,8 @@ public class LoginFragment extends Fragment {
                             Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
 
                             // Charger le RestoFragment
-                            RestoFragment restoFragment = new RestoFragment();
-                            FragmentTransaction restoTransaction = getFragmentManager().beginTransaction();
-                            restoTransaction.replace(R.id.fragment_container, restoFragment);
-                            restoTransaction.commit();
+                            Intent intent = new Intent(getActivity(), ActivityFragmentSwitcher.class);
+                            startActivity(intent);
 
                         } else {
                             // Échec de la connexion, affichez un message d'erreur
