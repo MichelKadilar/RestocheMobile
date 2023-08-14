@@ -74,7 +74,7 @@ public class FragmentRestaurantProfile extends Fragment {
     }
 
     private void setRandomDistance() {
-        double randomDistance = 0.1 + Math.random() * 15; // Génère une distance aléatoire entre 1000 et 41000
+        double randomDistance = 0.1 + Math.random() * 10; // Génère une distance aléatoire entre 1000 et 41000
         distanceTextView.setText(String.format("%.1f KM", randomDistance));
     }
 }
