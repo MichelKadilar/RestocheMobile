@@ -61,6 +61,9 @@ public class FragmentUserInfo extends Fragment {
             String ageText = getAgeFromBirthday(user.getBirthday()) + " ans - " + user.getBirthday();
             tvAge.setText(ageText);
         }
+        ImageView profilImage = view.findViewById(R.id.IV_user_profile_img);
+        String imageUrl = user.getProfil();
+        Picasso.get().load(imageUrl).into(profilImage);
 
         return view;
     }
