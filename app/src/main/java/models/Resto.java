@@ -9,6 +9,8 @@ public class Resto implements Parcelable {
     private String image;
 
     private String spec;
+
+    private String description;
     private float ratings;
 
     public Resto() {
@@ -78,6 +80,14 @@ public class Resto implements Parcelable {
 
     public void setSpec(String spec) {
         this.spec = spec;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

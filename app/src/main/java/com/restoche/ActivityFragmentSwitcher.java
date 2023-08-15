@@ -10,13 +10,17 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fragments.FragmentParameters;
+import fragments.FragmentUserInfo;
 import fragments.FragmentUserProfile;
 import fragments.RestoFragment;
+import models.User;
 
 public class ActivityFragmentSwitcher extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
 
     private int currentSelectedItemId;
     private BottomNavigationView bottomNavigationView;
+
+    private User user; // Ajoutez cette ligne
 
     private FragmentManager fm;
 
@@ -33,6 +37,9 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
 
         this.currentSelectedItemId = bottomNavigationView.getMenu().getItem(0).getItemId();
         bottomNavigationView.setOnItemSelectedListener(this);
+
+        // Récupérez l'objet User depuis l'Intent
+        user = getIntent().getParcelableExtra("user");
     }
 
     @Override
@@ -44,7 +51,12 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
                 return true;
             }
             case R.id.access_profile -> {
-                fm.beginTransaction().replace(R.id.frame_fragment_container, new FragmentUserProfile()).commit();
+                FragmentUserInfo fragment = new FragmentUserInfo();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("user", user);  // Passez l'objet User au fragment
+                fragment.setArguments(bundle);
+
+                fm.beginTransaction().replace(R.id.frame_fragment_container, fragment).commit();
                 return true;
             }
             case R.id.liste_resto -> {

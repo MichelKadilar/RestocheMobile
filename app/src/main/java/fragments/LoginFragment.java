@@ -22,10 +22,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.restoche.ActivityFragmentSwitcher;
 import com.restoche.MainActivity;
 import com.restoche.R;
 
+import models.User;
 import viewModels.LoginViewModel;
 
 public class LoginFragment extends Fragment {
@@ -107,15 +113,31 @@ public class LoginFragment extends Fragment {
             if (loginViewModel.validateInputs()) {
                 loginViewModel.authenticate(new LoginViewModel.OnAuthenticationCompleteListener() {
                     @Override
-                    public void onAuthenticationComplete(boolean success, FirebaseUser user) {
+                    public void onAuthenticationComplete(boolean success, FirebaseUser firebaseUser) {
                         if (success) {
-                            // Connexion réussie, passez à l'activité suivante ou au fragment suivant
-                            Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
+                            // Récupérer les données utilisateur à partir de l'UID
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
+                            mDatabase.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    User user = dataSnapshot.getValue(User.class);
 
-                            // Charger le RestoFragment
-                            Intent intent = new Intent(getActivity(), ActivityFragmentSwitcher.class);
-                            startActivity(intent);
+                                    if (user != null) {
+                                        // Charger le RestoFragment avec l'objet user en extra
+                                        Intent intent = new Intent(getActivity(), ActivityFragmentSwitcher.class);
+                                        intent.putExtra("user", user); // Passez l'objet user en extra
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(getContext(), "Erreur lors de la récupération des données utilisateur", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Affichez une erreur si quelque chose ne va pas
+                                    Toast.makeText(getContext(), "Erreur: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             // Échec de la connexion, affichez un message d'erreur
                             Toast.makeText(getContext(), "Échec de la connexion", Toast.LENGTH_SHORT).show();
@@ -127,6 +149,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getContext(), "Les entrées ne sont pas valides", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         // Set an OnClickListener for the "Register" TextView
         registerTextView.setOnClickListener(view12 -> {
