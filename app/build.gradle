@@ -81,6 +81,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:22.1.0'
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.code.gson:gson:2.8.8'  // Vérifiez la version la plus récente
+    implementation 'jp.wasabeef:picasso-transformations:2.4.0'
+
 
 
 }

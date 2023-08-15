@@ -1,34 +1,38 @@
 package models;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
+
 public class User implements Parcelable {
-    private String email;
-    private String password;
-    private String birthday;
-    private String id;
-    private String nom;
-    private String prenom;
-    private String profil;
-    private String pseudo;
+    public String email;
+    public String password;
+    public String birthday;
+    public String uid;
+    public String nom;
+    public String prenom;
+    public String profil;
+    public String pseudo;
+
+    public User() {
+    }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.birthday = birthday;
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.profil = profil;
-        this.pseudo = pseudo;
+
     }
 
     protected User(Parcel in) {
         email = in.readString();
         password = in.readString();
         birthday = in.readString();
-        id = in.readString();
+        uid = in.readString();
         nom = in.readString();
         prenom = in.readString();
         profil = in.readString();
@@ -45,7 +49,7 @@ public class User implements Parcelable {
         dest.writeString(email);
         dest.writeString(password);
         dest.writeString(birthday);
-        dest.writeString(id);
+        dest.writeString(uid);
         dest.writeString(nom);
         dest.writeString(prenom);
         dest.writeString(profil);
@@ -89,11 +93,11 @@ public class User implements Parcelable {
     }
 
     public String getId() {
-        return id;
+        return uid;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.uid = id;
     }
 
     public String getNom() {
@@ -127,4 +131,33 @@ public class User implements Parcelable {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", uid='" + uid + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", profil='" + profil + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                '}';
+    }
+    public void saveUserToPreferences(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user", new Gson().toJson(this));
+        editor.apply();
+    }
+
+    public static User getUserFromPreferences(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String userJson = sharedPreferences.getString("user", "");
+        return new Gson().fromJson(userJson, User.class);
+    }
+
+
+
 }

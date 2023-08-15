@@ -1,5 +1,6 @@
 package com.restoche;
 
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fragments.FragmentParameters;
-import fragments.FragmentUserInfo;
 import fragments.FragmentUserProfile;
 import fragments.RestoFragment;
 import models.User;
@@ -40,6 +40,7 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
 
         // Récupérez l'objet User depuis l'Intent
         user = getIntent().getParcelableExtra("user");
+
     }
 
     @Override
@@ -51,12 +52,9 @@ public class ActivityFragmentSwitcher extends AppCompatActivity implements Botto
                 return true;
             }
             case R.id.access_profile -> {
-                FragmentUserInfo fragment = new FragmentUserInfo();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("user", user);  // Passez l'objet User au fragment
-                fragment.setArguments(bundle);
-
-                fm.beginTransaction().replace(R.id.frame_fragment_container, fragment).commit();
+                this.user=User.getUserFromPreferences(this);
+                FragmentUserProfile userProfileFragment = FragmentUserProfile.newInstance(this.user);
+                fm.beginTransaction().replace(R.id.frame_fragment_container, userProfileFragment).commit();
                 return true;
             }
             case R.id.liste_resto -> {

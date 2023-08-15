@@ -1,5 +1,6 @@
 package fragments;
 
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -115,40 +116,46 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onAuthenticationComplete(boolean success, FirebaseUser firebaseUser) {
                         if (success) {
-                            // Récupérer les données utilisateur à partir de l'UID
-                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
-                            mDatabase.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            String uid = firebaseUser.getUid();
+                            System.out.println("voici son uid + " +uid);
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users"); // Assurez-vous d'avoir le chemin correct
+                            databaseReference.orderByChild("uid").equalTo(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    User user = dataSnapshot.getValue(User.class);
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        // Un utilisateur avec cet UID a été trouvé
+                                        User user = dataSnapshot.getChildren().iterator().next().getValue(User.class);
+                                        // Vous pouvez maintenant passer l'objet user comme Parcelable si nécessaire
+                                        user.saveUserToPreferences(getContext());
+                                        if (user != null) {
+                                            Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
 
-                                    if (user != null) {
-                                        // Charger le RestoFragment avec l'objet user en extra
-                                        Intent intent = new Intent(getActivity(), ActivityFragmentSwitcher.class);
-                                        intent.putExtra("user", user); // Passez l'objet user en extra
-                                        startActivity(intent);
+                                            Intent intent = new Intent(getActivity(), ActivityFragmentSwitcher.class);
+                                            intent.putExtra("user", user); // Passez l'objet utilisateur en Parcelable
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(getContext(), "Échec de la récupération des données utilisateur", Toast.LENGTH_SHORT).show();
+                                        }
                                     } else {
-                                        Toast.makeText(getContext(), "Erreur lors de la récupération des données utilisateur", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Utilisateur non trouvé dans la base de données", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
                                 @Override
-                                public void onCancelled(DatabaseError error) {
-                                    // Affichez une erreur si quelque chose ne va pas
-                                    Toast.makeText(getContext(), "Erreur: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(getContext(), "Erreur de la base de données", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } else {
-                            // Échec de la connexion, affichez un message d'erreur
                             Toast.makeText(getContext(), "Échec de la connexion", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             } else {
-                // Les entrées ne sont pas valides, affichez un message d'erreur
                 Toast.makeText(getContext(), "Les entrées ne sont pas valides", Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
         // Set an OnClickListener for the "Register" TextView

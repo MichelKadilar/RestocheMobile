@@ -2,6 +2,7 @@ package fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import models.Resto;
 import models.User;
 
@@ -39,6 +41,16 @@ public class FragmentUserInfo extends Fragment {
         if (getArguments() != null) {
             user = getArguments().getParcelable("user");
         }
+        if(user==null) user=User.getUserFromPreferences(getContext());
+    }
+
+    // Méthode statique pour créer une nouvelle instance de FragmentUserInfo
+    public static FragmentUserInfo newInstance(User user) {
+        FragmentUserInfo fragment = new FragmentUserInfo();
+        Bundle args = new Bundle();
+        args.putParcelable("user", user);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Nullable
@@ -51,19 +63,29 @@ public class FragmentUserInfo extends Fragment {
         tvFirstname = view.findViewById(R.id.TV_firstname);
         tvLastname = view.findViewById(R.id.TV_lastname);
         tvAge = view.findViewById(R.id.TV_age);
+        ImageView profilImage = view.findViewById(R.id.IV_user_profile_img);
 
+
+        if (user == null) {
+            Log.e("FragmentUserInfo", "User object is null!");
+            return view; // retourne la vue sans tenter d'accéder aux méthodes de l'objet user
+        }
         // Remplacez le texte des TextViews par les propriétés de l'objet User
         if (user != null) {
             tvFirstname.setText(user.getPseudo());
             tvLastname.setText(user.getPrenom());
+            String imageUrl = user.getProfil();
 
             // Pour la date de naissance, vous pouvez utiliser une fonction pour calculer l'âge
             String ageText = getAgeFromBirthday(user.getBirthday()) + " ans - " + user.getBirthday();
             tvAge.setText(ageText);
+            Picasso.get().load(imageUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(profilImage);
+
         }
-        ImageView profilImage = view.findViewById(R.id.IV_user_profile_img);
-        String imageUrl = user.getProfil();
-        Picasso.get().load(imageUrl).into(profilImage);
+
+
 
         return view;
     }
