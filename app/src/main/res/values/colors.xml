@@ -28,6 +28,7 @@
     <color name="hint_light">#808080</color> <!-- Gris pour le mode clair -->
     <color name="hint_dark">#B3B3B3</color>
     <!-- autres couleurs -->
+    <color name="primary">#6200EA</color>
 
 
     <color name="transparent">#00000000</color>
